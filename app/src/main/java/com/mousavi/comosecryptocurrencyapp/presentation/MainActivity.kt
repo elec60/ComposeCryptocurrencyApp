@@ -1,4 +1,4 @@
-package com.mousavi.comosecryptocurrencyapp
+package com.mousavi.comosecryptocurrencyapp.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -20,9 +19,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mousavi.comosecryptocurrencyapp.presentation.list.CoinsViewModel
-import com.mousavi.comosecryptocurrencyapp.presentation.list.components.CoinsScreen
-import com.mousavi.comosecryptocurrencyapp.ui.theme.ComoseCryptocurrencyAppTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.mousavi.comosecryptocurrencyapp.R
+import com.mousavi.comosecryptocurrencyapp.presentation.coin_detail.CoinDetailScreen
+import com.mousavi.comosecryptocurrencyapp.presentation.coin_list.CoinsViewModel
+import com.mousavi.comosecryptocurrencyapp.presentation.coin_list.components.CoinsScreen
+import com.mousavi.comosecryptocurrencyapp.presentation.ui.theme.ComoseCryptocurrencyAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -73,6 +77,7 @@ class MainActivity : ComponentActivity() {
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
+
                             Text(text = "Coins", color = Color.Black, fontSize = 20.sp)
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_sort),
@@ -83,7 +88,22 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-                        CoinsScreen(scrollState = lazyListState, viewModel = viewModel)
+                        val navController = rememberNavController()
+                        NavHost(
+                            navController = navController,
+                            startDestination = Screen.CoinListScreen.route
+                        ) {
+                            composable(
+                                route = Screen.CoinListScreen.route
+                            ) {
+                                CoinsScreen(navController = navController, scrollState = lazyListState, viewModel = viewModel)
+                            }
+                            composable(
+                                route = Screen.CoinDetailScreen.route + "/{coinId}"
+                            ) {
+                                CoinDetailScreen()
+                            }
+                        }
                     }
                 }
             }

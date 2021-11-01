@@ -1,4 +1,4 @@
-package com.mousavi.comosecryptocurrencyapp.presentation.list.components
+package com.mousavi.comosecryptocurrencyapp.presentation.coin_list.components
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background

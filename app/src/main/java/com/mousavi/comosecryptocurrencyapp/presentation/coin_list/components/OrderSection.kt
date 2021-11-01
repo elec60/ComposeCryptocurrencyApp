@@ -1,10 +1,10 @@
-package com.mousavi.comosecryptocurrencyapp.presentation.list.components
+package com.mousavi.comosecryptocurrencyapp.presentation.coin_list.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mousavi.comosecryptocurrencyapp.presentation.list.CoinsViewModel
+import com.mousavi.comosecryptocurrencyapp.presentation.coin_list.CoinsViewModel
 import com.mousavi.comosecryptocurrencyapp.presentation.util.CoinOrder
 import com.mousavi.comosecryptocurrencyapp.presentation.util.OrderType
 

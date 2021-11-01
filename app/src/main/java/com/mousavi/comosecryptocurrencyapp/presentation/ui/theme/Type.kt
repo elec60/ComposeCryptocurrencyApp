@@ -1,4 +1,4 @@
-package com.mousavi.comosecryptocurrencyapp.ui.theme
+package com.mousavi.comosecryptocurrencyapp.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

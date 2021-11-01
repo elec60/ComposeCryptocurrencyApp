@@ -7,5 +7,5 @@ interface CoinsRepository {
 
     suspend fun getCoins(): List<CoinDto>
 
-    suspend fun getCoinDetails(): CoinDetailsDto
+    suspend fun getCoinDetails(coinId: String): CoinDetailsDto
 }

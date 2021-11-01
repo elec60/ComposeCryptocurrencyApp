@@ -2,10 +2,11 @@ package com.mousavi.comosecryptocurrencyapp.data.remote.dto
 
 
 import com.google.gson.annotations.SerializedName
+import com.mousavi.comosecryptocurrencyapp.domain.model.CoinDetails
 
 data class CoinDetailsDto(
     @SerializedName("description")
-    val description: String,
+    val description: String?,
     @SerializedName("development_status")
     val developmentStatus: String,
     @SerializedName("first_data_at")
@@ -43,11 +44,24 @@ data class CoinDetailsDto(
     @SerializedName("symbol")
     val symbol: String,
     @SerializedName("tags")
-    val tags: List<Tag>,
+    val tags: List<Tag>?,
     @SerializedName("team")
-    val team: List<Team>,
+    val team: List<TeamMember>?,
     @SerializedName("type")
     val type: String,
     @SerializedName("whitepaper")
     val whitepaper: Whitepaper
 )
+
+fun CoinDetailsDto.toCoinDetail(): CoinDetails {
+    return CoinDetails(
+        coinId = id,
+        name = name,
+        description = description ?: "",
+        symbol = symbol,
+        rank = rank,
+        isActive = isActive,
+        tags = tags?.map { it.name } ?: emptyList(),
+        team = team ?: emptyList()
+    )
+}
