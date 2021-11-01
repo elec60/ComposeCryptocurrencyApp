@@ -1,10 +1,9 @@
 package com.mousavi.comosecryptocurrencyapp.di
 
-import com.google.gson.Gson
-import com.mousavi.comosecryptocurrencyapp.data.remote.CoinAPi
+import com.mousavi.comosecryptocurrencyapp.common.Constants
+import com.mousavi.comosecryptocurrencyapp.data.remote.CoinApi
 import com.mousavi.comosecryptocurrencyapp.data.repository.CoinsRepositoryImpl
 import com.mousavi.comosecryptocurrencyapp.domain.repository.CoinsRepository
-import com.mousavi.comosecryptocurrencyapp.domain.usecases.GetCoins
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,24 +18,19 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitApi(): CoinAPi {
+    fun provideRetrofitApi(): CoinApi {
         return Retrofit
             .Builder()
-            .baseUrl("https://api.coinpaprika.com/")
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(CoinAPi::class.java)
+            .create(CoinApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideCoinRepository(repo: CoinsRepositoryImpl): CoinsRepository {
-        return repo
+    fun provideCoinRepository(api: CoinApi): CoinsRepository {
+        return CoinsRepositoryImpl(api)
     }
 
-    @Provides
-    @Singleton
-    fun provideGetCoinUseCase(repository: CoinsRepository): GetCoins {
-        return GetCoins(repository)
-    }
 }

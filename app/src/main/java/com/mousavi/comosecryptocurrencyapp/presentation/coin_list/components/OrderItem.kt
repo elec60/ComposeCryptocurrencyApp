@@ -1,4 +1,4 @@
-package com.mousavi.comosecryptocurrencyapp.presentation.list.components
+package com.mousavi.comosecryptocurrencyapp.presentation.coin_list.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

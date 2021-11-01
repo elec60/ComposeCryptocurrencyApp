@@ -1,4 +1,4 @@
-package com.mousavi.comosecryptocurrencyapp.presentation.list
+package com.mousavi.comosecryptocurrencyapp.presentation.coin_list
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mousavi.comosecryptocurrencyapp.common.Resource
 import com.mousavi.comosecryptocurrencyapp.domain.model.Coin
-import com.mousavi.comosecryptocurrencyapp.domain.usecases.GetCoins
+import com.mousavi.comosecryptocurrencyapp.domain.usecases.get_coins.GetCoinsUseCase
 import com.mousavi.comosecryptocurrencyapp.presentation.util.CoinOrder
 import com.mousavi.comosecryptocurrencyapp.presentation.util.UserEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CoinsViewModel @Inject constructor(
-    private val useCase: GetCoins,
+    private val getCoinsUseCase: GetCoinsUseCase,
 ) : ViewModel() {
 
     private var _stateList = mutableStateOf<List<Coin>>(emptyList())
@@ -36,7 +36,7 @@ class CoinsViewModel @Inject constructor(
     }
 
     private fun getCoins(coinOrder: CoinOrder = userEventState.value.order) {
-        useCase(coinOrder).onEach {
+        getCoinsUseCase(coinOrder).onEach {
             when (it) {
                 is Resource.Error -> {
                     _loading.emit(false)

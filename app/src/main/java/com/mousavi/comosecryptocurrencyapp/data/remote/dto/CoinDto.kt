@@ -24,10 +24,8 @@ fun CoinDto.toCoin(): Coin {
     return Coin(
         id = id,
         isActive = isActive,
-        isNew = isNew,
         name = name,
         rank = rank,
-        symbol = symbol,
-        type = type
+        symbol = symbol
     )
 }

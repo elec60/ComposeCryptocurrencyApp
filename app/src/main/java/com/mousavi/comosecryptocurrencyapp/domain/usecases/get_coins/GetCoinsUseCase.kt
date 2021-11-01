@@ -1,4 +1,4 @@
-package com.mousavi.comosecryptocurrencyapp.domain.usecases
+package com.mousavi.comosecryptocurrencyapp.domain.usecases.get_coins
 
 import com.mousavi.comosecryptocurrencyapp.common.Resource
 import com.mousavi.comosecryptocurrencyapp.data.remote.dto.toCoin
@@ -10,13 +10,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-class GetCoins(
+class GetCoinsUseCase @Inject constructor(
     private var repository: CoinsRepository,
 ) {
     operator fun invoke(coinOrder: CoinOrder): Flow<Resource<List<Coin>>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading<List<Coin>>())
             val coins = repository.getCoins().map { it.toCoin() }
             val sorted: List<Coin>
             when (coinOrder.orderType) {
@@ -47,13 +48,13 @@ class GetCoins(
                     }
                 }
             }
-            emit(Resource.Success(sorted))
+            emit(Resource.Success<List<Coin>>(sorted))
         } catch (e: HttpException) {
-            emit(Resource.Error(error = e.message ?: "Error occurred"))
+            emit(Resource.Error<List<Coin>>(error = e.message ?: "Error occurred"))
         } catch (e: IOException) {
-            emit(Resource.Error(error = e.message ?: "Check your internet connection!"))
+            emit(Resource.Error<List<Coin>>(error = e.message ?: "Check your internet connection!"))
         } catch (e: Exception) {
-            emit(Resource.Error(error = e.message ?: "Unknown error!"))
+            emit(Resource.Error<List<Coin>>(error = e.message ?: "Unknown error!"))
         }
     }
 }

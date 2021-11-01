@@ -1,4 +1,4 @@
-package com.mousavi.comosecryptocurrencyapp.ui.theme
+package com.mousavi.comosecryptocurrencyapp.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

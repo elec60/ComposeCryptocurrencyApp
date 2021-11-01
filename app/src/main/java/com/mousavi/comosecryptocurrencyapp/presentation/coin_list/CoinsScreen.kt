@@ -1,4 +1,4 @@
-package com.mousavi.comosecryptocurrencyapp.presentation.list.components
+package com.mousavi.comosecryptocurrencyapp.presentation.coin_list.components
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Column
@@ -9,11 +9,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.mousavi.comosecryptocurrencyapp.presentation.list.CoinsViewModel
+import androidx.navigation.NavController
+import com.mousavi.comosecryptocurrencyapp.presentation.Screen
+import com.mousavi.comosecryptocurrencyapp.presentation.coin_list.CoinsViewModel
 
 @ExperimentalAnimationApi
 @Composable
 fun CoinsScreen(
+    navController: NavController,
     scrollState: LazyListState,
     viewModel: CoinsViewModel,
 ) {
@@ -47,7 +50,11 @@ fun CoinsScreen(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(statList) { coin ->
-                        CoinItem(coin)
+                        CoinItem(coin,
+                            onItemClick = {
+                                navController.navigate(Screen.CoinDetailScreen.route + "/${coin.id}")
+                            }
+                        )
                     }
                 }
             }

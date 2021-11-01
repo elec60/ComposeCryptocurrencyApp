@@ -3,27 +3,12 @@ package com.mousavi.comosecryptocurrencyapp.domain.model
 import com.mousavi.comosecryptocurrencyapp.data.remote.dto.*
 
 data class CoinDetails(
-    val description: String,
-    val developmentStatus: String,
-    val firstDataAt: String,
-    val hardwareWallet: Boolean,
-    val hashAlgorithm: String,
-    val id: String,
-    val isActive: Boolean,
-    val isNew: Boolean,
-    val lastDataAt: String,
-    val links: Links,
-    val linksExtended: List<LinksExtended>,
-    val message: String,
+    val coinId: String,
     val name: String,
-    val openSource: Boolean,
-    val orgStructure: String,
-    val proofType: String,
-    val rank: Int,
-    val startedAt: String,
+    val description: String,
     val symbol: String,
-    val tags: List<Tag>,
-    val team: List<Team>,
-    val type: String,
-    val whitepaper: Whitepaper
+    val rank: Int,
+    val isActive: Boolean,
+    val tags: List<String>,
+    val team: List<TeamMember>
 )
